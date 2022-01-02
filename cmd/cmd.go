@@ -101,7 +101,7 @@ func getCode(filename string, templates []config.CodeTemplate) (codes []CodeList
 	if filename != "" {
 		ext := filepath.Ext(filename)
 		if idx, ok := mp[ext]; ok {
-			return []CodeList{CodeList{filename, idx}}, nil
+			return []CodeList{{filename, idx}}, nil
 		}
 		return nil, fmt.Errorf("%v can not match any template. You could add a new template by `cf config`", filename)
 	}
@@ -132,7 +132,7 @@ func getOneCode(filename string, templates []config.CodeTemplate) (name string, 
 		return
 	}
 	if len(codes) < 1 {
-		return "", 0, errors.New("Cannot find any code.\nMaybe you should add a new template by `cf config`")
+		return "", 0, errors.New("cannot find any code.\nmaybe you should add a new template by `cf config`")
 	}
 	if len(codes) > 1 {
 		color.Cyan("There are multiple files can be selected.")

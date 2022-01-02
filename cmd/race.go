@@ -20,7 +20,7 @@ func Race() (err error) {
 	if err != nil {
 		return
 	}
-	time.Sleep(1)
+	time.Sleep(time.Microsecond)
 	URL, err := info.ProblemSetURL(cfg.Host)
 	if err != nil {
 		return
