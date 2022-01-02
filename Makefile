@@ -1,2 +1,2 @@
 all:
-	go build cf.go
+	go build -ldflags "-s -w" cf.go
