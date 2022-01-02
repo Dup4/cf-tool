@@ -62,27 +62,27 @@ $ go build -ldflags "-s -w" cf.go
 
 进入 A 题的目录，此时该目录下会包含该题的样例。
 
- `cf gen` 
+ `cf gen`
 
 用默认模板生成一份代码，代码文件名默认是题目的 ID。
 
- `vim a.cpp` 
+ `vim a.cpp`
 
 用 Vim 写代码（这取决于你）。
 
- `cf test` 
+ `cf test`
 
 编译并测试样例。
 
- `cf submit` 
+ `cf submit`
 
 提交代码。
 
- `cf list` 
+ `cf list`
 
 查看当前比赛各个题目的信息。
 
- `cf stand` 
+ `cf stand`
 
 用浏览器打开榜单，查看排名。
 
@@ -126,12 +126,12 @@ $ go build -ldflags "-s -w" cf.go
   cf submit            cf 会自动检测你需要提交的文件。
   cf submit -f a.cpp
   cf submit https://codeforces.com/contest/100/A
-  cf submit -f a.cpp 100A 
+  cf submit -f a.cpp 100A
   cf submit -f a.cpp 100 a
   cf submit contest 100 a
   cf submit gym 100001 a
   cf list              列出当前比赛的题目通过、时限等信息。
-  cf list 1119         
+  cf list 1119
   cf parse 100         获取 contest 100 的所有题目的样例到文件夹
                        "{cf}/{contest}/100/" 中。
   cf parse gym 100001a
@@ -189,7 +189,7 @@ $ go build -ldflags "-s -w" cf.go
   在 "script" 里你必须要运行你的程序，通过标准 IO 来输入/输出数据（不用重定向）。
 
   你在这些脚本命令里也能插入一些标识符，这些标识符会按照以下规则替换：
-  
+
   $%path%$   代码的路径 (不包括 $%full%$， 比如 "/home/xalanq/")
   $%full%$   代码的文件名 (比如 "a.cpp")
   $%file%$   代码的文件名 (不包括后缀，比如 "a")
@@ -225,7 +225,7 @@ typedef long long ll;
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(0);
-    
+
     return 0;
 }
 ```
