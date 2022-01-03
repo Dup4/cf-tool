@@ -32,7 +32,7 @@ func (c *Config) AddTemplate() (err error) {
 		fmt.Printf("%5v: %v\n", t.K, t.V)
 	}
 
-	color.Cyan(`Select a language (e.g. "42"): `)
+	color.Cyan(`Select a language (e.g. "54"): `)
 	lang := ""
 
 	for {
