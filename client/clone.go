@@ -38,8 +38,9 @@ func (c *Client) Clone(handle, rootPath string, ac bool) (err error) {
 	}
 
 	if status, ok := data["status"].(string); !ok || status != "OK" {
-		return fmt.Errorf("Cannot get any submission")
+		return fmt.Errorf("cannot get any submission")
 	}
+
 	submissions := data["result"].([]interface{})
 	total := len(submissions)
 	count := 0
@@ -110,6 +111,7 @@ func (c *Client) Clone(handle, rootPath string, ac bool) (err error) {
 			}
 		}()
 	}
+
 	for _, _submission := range submissions {
 		func() {
 			defer func() {
@@ -118,23 +120,28 @@ func (c *Client) Clone(handle, rootPath string, ac bool) (err error) {
 					color.Red("%v", _submission)
 				}
 			}()
+
 			submission := _submission.(map[string]interface{})
 			verdict := submission["verdict"].(string)
 			lang := submission["programmingLanguage"].(string)
 			contestID := ""
+
 			if v, ok := submission["contestId"].(float64); ok {
 				contestID = fmt.Sprintf("%v", int64(v))
 			} else {
 				contestID = "99999"
 			}
+
 			submissionID := fmt.Sprintf("%v", int64(submission["id"].(float64)))
 			problemID := strings.ToLower(submission["problem"].(map[string]interface{})["index"].(string))
 			info := Info{ProblemType: "contest", ContestID: contestID, ProblemID: problemID, SubmissionID: submissionID}
+
 			if contestID == "99999" {
 				info.ProblemType = "acmsguru"
 			} else if len(contestID) >= 6 {
 				info.ProblemType = "gym"
 			}
+
 			if ac && verdict != "OK" {
 				mu.Lock()
 				count++
@@ -142,6 +149,7 @@ func (c *Client) Clone(handle, rootPath string, ac bool) (err error) {
 				mu.Unlock()
 				return
 			}
+
 			ext, ok := LangsExt[lang]
 			if !ok {
 				mu.Lock()
@@ -150,17 +158,20 @@ func (c *Client) Clone(handle, rootPath string, ac bool) (err error) {
 				mu.Unlock()
 				return
 			}
+
 			filename := submissionID
 			if verdict != "OK" {
 				testCount := int64(submission["passedTestCount"].(float64))
 				filename = fmt.Sprintf("%v_%v_%v", submissionID, strings.ToLower(verdict), testCount)
 			}
+
 			info.RootPath = filepath.Join(rootPath, handle, info.ProblemType)
 			URL, _ := info.SubmissionURL(c.host)
 			data := cloneData{URL, filepath.Join(info.Path(), filename), "." + ext}
 			ch <- data
 		}()
 	}
+
 	close(ch)
 	close(again)
 	wg.Wait()

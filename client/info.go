@@ -26,25 +26,28 @@ type Info struct {
 }
 
 // ErrorNeedProblemID error
-const ErrorNeedProblemID = "You have to specify the Problem ID"
+const ErrorNeedProblemID = "you have to specify the problem id"
 
 // ErrorNeedContestID error
-const ErrorNeedContestID = "You have to specify the Contest ID"
+const ErrorNeedContestID = "you have to specify the contest id"
 
 // ErrorNeedGymID error
-const ErrorNeedGymID = "You have to specify the Gym ID"
+const ErrorNeedGymID = "you have to specify the gym id"
 
 // ErrorNeedGroupID error
-const ErrorNeedGroupID = "You have to specify the Group ID"
+const ErrorNeedGroupID = "you have to specify the group id"
 
 // ErrorNeedSubmissionID error
-const ErrorNeedSubmissionID = "You have to specify the Submission ID"
+const ErrorNeedSubmissionID = "you have to specify the submission id"
 
 // ErrorUnknownType error
-const ErrorUnknownType = "Unknown Type"
+const ErrorUnknownType = "unknown type"
 
 // ErrorNotSupportAcmsguru error
-const ErrorNotSupportAcmsguru = "Not support acmsguru"
+const ErrorNotSupportAcmsguru = "not support acmsguru"
+
+// ErrorIDontKnowWhatYouWantToDo error
+const ErrorIDontKnowWhatYouWantToDo = "hmmm i don't know what you want to do~"
 
 func (info *Info) errorContest() (string, error) {
 	if info.ProblemType == "gym" {
@@ -59,6 +62,7 @@ func (info *Info) Hint() string {
 	if info.GroupID != "" {
 		text = text + " " + info.GroupID
 	}
+
 	if info.ProblemType != "acmsguru" && info.ContestID != "" {
 		if info.ProblemType != "group" {
 			text = text + " " + info.ContestID
@@ -66,9 +70,11 @@ func (info *Info) Hint() string {
 			text = text + ", contest " + info.ContestID
 		}
 	}
+
 	if info.ProblemID != "" {
 		text = text + ", problem " + info.ProblemID
 	}
+
 	if info.SubmissionID != "" {
 		text = text + ", submission " + info.SubmissionID
 	}
@@ -81,9 +87,11 @@ func (info *Info) Path() string {
 	if info.GroupID != "" {
 		path = filepath.Join(path, info.GroupID)
 	}
+
 	if info.ProblemType != "acmsguru" && info.ContestID != "" {
 		path = filepath.Join(path, info.ContestID)
 	}
+
 	if info.ProblemID != "" {
 		path = filepath.Join(path, strings.ToLower(info.ProblemID))
 	}
@@ -95,6 +103,7 @@ func (info *Info) ProblemSetURL(host string) (string, error) {
 	if info.ContestID == "" {
 		return info.errorContest()
 	}
+
 	switch info.ProblemType {
 	case "contest":
 		return fmt.Sprintf(host+"/contest/%v", info.ContestID), nil
@@ -108,6 +117,7 @@ func (info *Info) ProblemSetURL(host string) (string, error) {
 	case "acmsguru":
 		return host + "/problemsets/acmsguru", nil
 	}
+
 	return "", errors.New(ErrorUnknownType)
 }
 
@@ -116,9 +126,11 @@ func (info *Info) ProblemURL(host string) (string, error) {
 	if info.ProblemID == "" {
 		return "", errors.New(ErrorNeedProblemID)
 	}
+
 	if info.ContestID == "" {
 		return info.errorContest()
 	}
+
 	switch info.ProblemType {
 	case "contest":
 		return fmt.Sprintf(host+"/contest/%v/problem/%v", info.ContestID, info.ProblemID), nil
@@ -132,6 +144,7 @@ func (info *Info) ProblemURL(host string) (string, error) {
 	case "acmsguru":
 		return fmt.Sprintf(host+"/problemsets/acmsguru/problem/%v/%v", info.ContestID, info.ProblemID), nil
 	}
+
 	return "", errors.New(ErrorUnknownType)
 }
 
@@ -140,6 +153,7 @@ func (info *Info) MySubmissionURL(host string) (string, error) {
 	if info.ContestID == "" {
 		return info.errorContest()
 	}
+
 	switch info.ProblemType {
 	case "contest":
 		return fmt.Sprintf(host+"/contest/%v/my", info.ContestID), nil
@@ -151,8 +165,9 @@ func (info *Info) MySubmissionURL(host string) (string, error) {
 		}
 		return fmt.Sprintf(host+"/group/%v/contest/%v/my", info.GroupID, info.ContestID), nil
 	case "acmsguru":
-		return "", errors.New("Not support acmsguru")
+		return "", errors.New(ErrorNotSupportAcmsguru)
 	}
+
 	return "", errors.New(ErrorUnknownType)
 }
 
@@ -161,9 +176,11 @@ func (info *Info) SubmissionURL(host string) (string, error) {
 	if info.SubmissionID == "" {
 		return "", errors.New(ErrorNeedSubmissionID)
 	}
+
 	if info.ContestID == "" {
 		return info.errorContest()
 	}
+
 	switch info.ProblemType {
 	case "contest":
 		return fmt.Sprintf(host+"/contest/%v/submission/%v", info.ContestID, info.SubmissionID), nil
@@ -177,6 +194,7 @@ func (info *Info) SubmissionURL(host string) (string, error) {
 	case "acmsguru":
 		return fmt.Sprintf(host+"/problemsets/acmsguru/submission/%v/%v", info.ContestID, info.SubmissionID), nil
 	}
+
 	return "", errors.New(ErrorUnknownType)
 }
 
@@ -185,6 +203,7 @@ func (info *Info) StandingsURL(host string) (string, error) {
 	if info.ContestID == "" {
 		return info.errorContest()
 	}
+
 	switch info.ProblemType {
 	case "contest":
 		return fmt.Sprintf(host+"/contest/%v/standings", info.ContestID), nil
@@ -198,6 +217,7 @@ func (info *Info) StandingsURL(host string) (string, error) {
 	case "acmsguru":
 		return host + "/problemsets/acmsguru/standings", nil
 	}
+
 	return "", errors.New(ErrorUnknownType)
 }
 
@@ -207,6 +227,7 @@ func (info *Info) SubmitURL(host string) (string, error) {
 	if err != nil {
 		return "", err
 	}
+
 	return URL + "/submit", nil
 }
 
@@ -242,5 +263,6 @@ func (info *Info) OpenURL(host string) (string, error) {
 		}
 		return fmt.Sprintf(host+"/problemsets/acmsguru/problem/%v/%v", info.ContestID, info.ProblemID), nil
 	}
-	return "", errors.New("Hmmm I don't know what you want to do~")
+
+	return "", errors.New(ErrorIDontKnowWhatYouWantToDo)
 }

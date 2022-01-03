@@ -22,8 +22,9 @@ func findStatisBlock(body []byte) ([]byte, error) {
 	reg := regexp.MustCompile(`class="problems"[\s\S]+?</tr>([\s\S]+?)</table>`)
 	tmp := reg.FindSubmatch(body)
 	if tmp == nil {
-		return nil, errors.New("Cannot find any problem statis")
+		return nil, errors.New("cannot find any problem statis")
 	}
+
 	return tmp[1], nil
 }
 
@@ -31,8 +32,9 @@ func findProblems(body []byte) ([]StatisInfo, error) {
 	reg := regexp.MustCompile(`<tr[\s\S]*?>`)
 	tmp := reg.FindAllIndex(body, -1)
 	if tmp == nil {
-		return nil, errors.New("Cannot find any problem")
+		return nil, errors.New("cannot find any problem")
 	}
+
 	ret := []StatisInfo{}
 	scr := regexp.MustCompile(`<script[\s\S]*?>[\s\S]*?</script>`)
 	cls := regexp.MustCompile(`class="(.+?)"`)
@@ -40,6 +42,7 @@ func findProblems(body []byte) ([]StatisInfo, error) {
 	ton := regexp.MustCompile(`<\s+`)
 	rmv := regexp.MustCompile(`<+`)
 	tmp = append(tmp, []int{len(body), 0})
+
 	for i := 1; i < len(tmp); i++ {
 		state := ""
 		if x := cls.FindSubmatch(body[tmp[i-1][0]:tmp[i-1][1]]); x != nil {
@@ -69,6 +72,7 @@ func findProblems(body []byte) ([]StatisInfo, error) {
 			})
 		}
 	}
+
 	return ret, nil
 }
 
@@ -78,6 +82,7 @@ func (c *Client) Statis(info Info) (problems []StatisInfo, err error) {
 	if err != nil {
 		return
 	}
+
 	if info.ProblemType == "acmsguru" {
 		return nil, errors.New(ErrorNotSupportAcmsguru)
 	}

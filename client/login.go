@@ -39,6 +39,7 @@ func findHandle(body []byte) (string, error) {
 	if len(tmp) < 2 {
 		return "", errors.New(ErrorNotLogged)
 	}
+
 	return string(tmp[1]), nil
 }
 
@@ -46,8 +47,9 @@ func findCsrf(body []byte) (string, error) {
 	reg := regexp.MustCompile(`csrf='(.+?)'`)
 	tmp := reg.FindSubmatch(body)
 	if len(tmp) < 2 {
-		return "", errors.New("Cannot find csrf")
+		return "", errors.New("cannot find csrf")
 	}
+
 	return string(tmp[1]), nil
 }
 
@@ -85,6 +87,7 @@ func (c *Client) Login() (err error) {
 		"_tta":          {"176"},
 		"remember":      {"on"},
 	})
+
 	if err != nil {
 		return
 	}
@@ -100,6 +103,7 @@ func (c *Client) Login() (err error) {
 	c.Jar = jar
 	color.Green("Succeed!!")
 	color.Green("Welcome %v~", handle)
+
 	return c.save()
 }
 
@@ -114,47 +118,56 @@ func encrypt(handle, password string) (ret string, err error) {
 	if err != nil {
 		return
 	}
+
 	gcm, err := cipher.NewGCM(block)
 	if err != nil {
 		return
 	}
+
 	nonce := make([]byte, gcm.NonceSize())
 	if _, err = io.ReadFull(rand.Reader, nonce); err != nil {
 		return
 	}
+
 	text := gcm.Seal(nonce, nonce, []byte(password), nil)
 	ret = hex.EncodeToString(text)
+
 	return
 }
 
 func decrypt(handle, password string) (ret string, err error) {
 	data, err := hex.DecodeString(password)
 	if err != nil {
-		err = errors.New("Cannot decode the password")
+		err = errors.New("cannot decode the password")
 		return
 	}
+
 	block, err := aes.NewCipher(createHash("glhf" + handle + "233"))
 	if err != nil {
 		return
 	}
+
 	gcm, err := cipher.NewGCM(block)
 	if err != nil {
 		return
 	}
+
 	nonceSize := gcm.NonceSize()
 	nonce, text := data[:nonceSize], data[nonceSize:]
 	plain, err := gcm.Open(nil, nonce, text, nil)
 	if err != nil {
 		return
 	}
+
 	ret = string(plain)
+
 	return
 }
 
 // DecryptPassword get real password
 func (c *Client) DecryptPassword() (string, error) {
 	if len(c.Password) == 0 || len(c.HandleOrEmail) == 0 {
-		return "", errors.New("You have to configure your handle and password by `cf config`")
+		return "", errors.New("you have to configure your handle and password by `cf config`")
 	}
 	return decrypt(c.HandleOrEmail, c.Password)
 }
@@ -164,6 +177,7 @@ func (c *Client) ConfigLogin() (err error) {
 	if c.Handle != "" {
 		color.Green("Current user: %v", c.Handle)
 	}
+
 	color.Cyan("Configure handle/email and password")
 	color.Cyan("Note: The password is invisible, just type it correctly.")
 
