@@ -6,7 +6,7 @@ fmt:
 	go fmt ./...
 
 build:
-	go build -trimpath -ldflags "${LDFLAGS}" -o cf cf.go
+	go build -ldflags "${LDFLAGS}" -o cf cf.go
 
 clean:
 	rm cf
