@@ -186,7 +186,6 @@ func upgrade(url, exePath string, size uint) (err error) {
 	err = (func() (err error) {
 		for {
 			hdr, err := tr.Next()
-
 			if err != nil {
 				return err
 			}
