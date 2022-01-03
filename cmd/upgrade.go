@@ -231,7 +231,6 @@ func Upgrade() (err error) {
 	color.Cyan("Checking version")
 
 	latest, note, ptime, url, size, err := getLatest()
-	fmt.Printf("%v, %d\n", url, size)
 	if err != nil {
 		return
 	}
