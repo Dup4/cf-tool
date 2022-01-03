@@ -23,6 +23,7 @@ func Eval(opts docopt.Opts) error {
 	if err := parseArgs(opts); err != nil {
 		return err
 	}
+
 	if Args.Config {
 		return Config()
 	} else if Args.Submit {
@@ -52,6 +53,7 @@ func Eval(opts docopt.Opts) error {
 	} else if Args.Upgrade {
 		return Upgrade()
 	}
+
 	return nil
 }
 
@@ -60,10 +62,12 @@ func getSampleID() (samples []string) {
 	if err != nil {
 		return
 	}
+
 	paths, err := ioutil.ReadDir(path)
 	if err != nil {
 		return
 	}
+
 	reg := regexp.MustCompile(`in(\d+).txt`)
 	for _, path := range paths {
 		name := path.Name()
@@ -76,6 +80,7 @@ func getSampleID() (samples []string) {
 			}
 		}
 	}
+
 	return
 }
 
@@ -110,6 +115,7 @@ func getCode(filename string, templates []config.CodeTemplate) (codes []CodeList
 	if err != nil {
 		return
 	}
+
 	paths, err := ioutil.ReadDir(path)
 	if err != nil {
 		return
@@ -131,9 +137,11 @@ func getOneCode(filename string, templates []config.CodeTemplate) (name string, 
 	if err != nil {
 		return
 	}
+
 	if len(codes) < 1 {
 		return "", 0, errors.New("cannot find any code.\nmaybe you should add a new template by `cf config`")
 	}
+
 	if len(codes) > 1 {
 		color.Cyan("There are multiple files can be selected.")
 		for i, code := range codes {
@@ -142,6 +150,7 @@ func getOneCode(filename string, templates []config.CodeTemplate) (name string, 
 		i := util.ChooseIndex(len(codes))
 		codes[0] = codes[i]
 	}
+
 	if len(codes[0].Index) > 1 {
 		color.Cyan("There are multiple languages match the file.")
 		for i, idx := range codes[0].Index {
@@ -150,6 +159,7 @@ func getOneCode(filename string, templates []config.CodeTemplate) (name string, 
 		i := util.ChooseIndex(len(codes[0].Index))
 		codes[0].Index[0] = codes[0].Index[i]
 	}
+
 	return codes[0].Name, codes[0].Index[0], nil
 }
 
@@ -158,5 +168,6 @@ func loginAgain(cln *client.Client, err error) error {
 		color.Red("Not logged. Try to login\n")
 		err = cln.Login()
 	}
+
 	return err
 }

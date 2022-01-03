@@ -15,7 +15,12 @@ import (
 	docopt "github.com/docopt/docopt-go"
 )
 
-const version = "v1.0.0"
+var (
+	version string
+	commit  string
+	date    string
+)
+
 const configPath = "~/.cf/config"
 const sessionPath = "~/.cf/session"
 
@@ -146,10 +151,17 @@ Script in template:
   $%full%$   Full name of source file (e.g. "a.cpp")
   $%file%$   Name of source file (Excluding suffix, e.g. "a")
   $%rand%$   Random string with 8 character (including "a-z" "0-9")`
+
+	versionInfo := `Codeforces Tool
+Version:      %s
+Git commit:   %s
+Build:        %s`
+
 	color.Output = ansi.NewAnsiStdout()
 
 	usage = strings.Replace(usage, `$%version%$`, version, 1)
-	opts, _ := docopt.ParseArgs(usage, os.Args[1:], fmt.Sprintf("Codeforces Tool (cf) %v", version))
+
+	opts, _ := docopt.ParseArgs(usage, os.Args[1:], fmt.Sprintf(versionInfo, version, commit, date))
 	opts[`{version}`] = version
 
 	cfgPath, _ := homedir.Expand(configPath)

@@ -1,4 +1,4 @@
-LDFLAGS := -s -w
+LDFLAGS := -s -w -X 'main.version=v0.0.0'
 
 all: fmt build
 
