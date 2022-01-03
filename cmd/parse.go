@@ -15,6 +15,7 @@ func Parse() (err error) {
 	info := Args.Info
 	source := ""
 	ext := ""
+
 	if cfg.GenAfterParse {
 		if len(cfg.Template) == 0 {
 			return errors.New("you have to add at least one code template by `cf config`")
@@ -25,6 +26,7 @@ func Parse() (err error) {
 			return
 		}
 	}
+
 	work := func() error {
 		_, paths, err := cln.Parse(info)
 		if err != nil {
@@ -37,10 +39,12 @@ func Parse() (err error) {
 		}
 		return nil
 	}
+
 	if err = work(); err != nil {
 		if err = loginAgain(cln, err); err == nil {
 			err = work()
 		}
 	}
+
 	return
 }

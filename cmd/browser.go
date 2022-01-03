@@ -18,6 +18,7 @@ func Open() (err error) {
 	if err != nil {
 		return
 	}
+
 	return openURL(URL)
 }
 
@@ -27,6 +28,7 @@ func Stand() (err error) {
 	if err != nil {
 		return
 	}
+
 	return openURL(URL)
 }
 
@@ -36,9 +38,11 @@ func Sid() (err error) {
 	if info.SubmissionID == "" && client.Instance.LastSubmission != nil {
 		info = *client.Instance.LastSubmission
 	}
+
 	URL, err := info.SubmissionURL(config.Instance.Host)
 	if err != nil {
 		return
 	}
+
 	return openURL(URL)
 }

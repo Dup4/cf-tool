@@ -21,16 +21,20 @@ func (c *Config) AddTemplate() (err error) {
 	type kv struct {
 		K, V string
 	}
+
 	langs := []kv{}
 	for k, v := range client.Langs {
 		langs = append(langs, kv{k, v})
 	}
+
 	sort.Slice(langs, func(i, j int) bool { return langs[i].V < langs[j].V })
 	for _, t := range langs {
 		fmt.Printf("%5v: %v\n", t.K, t.V)
 	}
+
 	color.Cyan(`Select a language (e.g. "42"): `)
 	lang := ""
+
 	for {
 		lang = util.ScanlineTrim()
 		if val, ok := client.Langs[lang]; ok {
@@ -139,6 +143,7 @@ func (c *Config) RemoveTemplate() (err error) {
 		color.Red("There is no template. Please add one")
 		return nil
 	}
+
 	for i, template := range c.Template {
 		star := " "
 		if i == c.Default {
@@ -147,6 +152,7 @@ func (c *Config) RemoveTemplate() (err error) {
 		ansi.Printf(`%v%2v: "%v" "%v"`, star, i, template.Alias, template.Path)
 		ansi.Println()
 	}
+
 	idx := util.ChooseIndex(len(c.Template))
 	c.Template = append(c.Template[:idx], c.Template[idx+1:]...)
 	if idx == c.Default {
@@ -154,6 +160,7 @@ func (c *Config) RemoveTemplate() (err error) {
 	} else if idx < c.Default {
 		c.Default--
 	}
+
 	return c.save()
 }
 
@@ -164,6 +171,7 @@ func (c *Config) SetDefaultTemplate() error {
 		color.Red("There is no template. Please add one")
 		return nil
 	}
+
 	for i, template := range c.Template {
 		star := " "
 		if i == c.Default {
@@ -172,6 +180,7 @@ func (c *Config) SetDefaultTemplate() error {
 		ansi.Printf(`%v%2v: "%v" "%v"`, star, i, template.Alias, template.Path)
 		ansi.Println()
 	}
+
 	c.Default = util.ChooseIndex(len(c.Template))
 	return c.save()
 }

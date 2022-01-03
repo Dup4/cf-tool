@@ -12,6 +12,7 @@ func Clone() (err error) {
 	if err != nil {
 		return
 	}
+
 	cln := client.Instance
 	ac := Args.Accepted
 	handle := Args.Handle
@@ -21,5 +22,6 @@ func Clone() (err error) {
 			err = cln.Clone(handle, currentPath, ac)
 		}
 	}
+
 	return
 }

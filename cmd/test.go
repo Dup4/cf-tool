@@ -201,5 +201,6 @@ func Test() (err error) {
 	} else {
 		return errors.New("invalid script command. please check config file")
 	}
+
 	return run(template.AfterScript)
 }

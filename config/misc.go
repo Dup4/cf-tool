@@ -20,9 +20,11 @@ func formatHost(host string) (string, error) {
 	if !reg.MatchString(host) {
 		return "", fmt.Errorf(`invalid host "%v"`, host)
 	}
+
 	for host[len(host)-1:] == "/" {
 		host = host[:len(host)-1]
 	}
+
 	return host, nil
 }
 
@@ -31,6 +33,7 @@ func formatProxy(proxy string) (string, error) {
 	if !reg.MatchString(proxy) {
 		return "", fmt.Errorf(`invalid proxy "%v"`, proxy)
 	}
+
 	return proxy, nil
 }
 
@@ -40,9 +43,11 @@ func (c *Config) SetHost() (err error) {
 	if err != nil {
 		host = "https://codeforces.com"
 	}
+
 	color.Green("Current host domain is %v", host)
 	color.Cyan(`Set a new host domain (e.g. "https://codeforces.com"`)
 	color.Cyan(`Note: Don't forget the "http://" or "https://"`)
+
 	for {
 		host, err = formatHost(util.ScanlineTrim())
 		if err == nil {
@@ -50,8 +55,10 @@ func (c *Config) SetHost() (err error) {
 		}
 		color.Red(err.Error())
 	}
+
 	c.Host = host
 	color.Green("New host domain is %v", host)
+
 	return c.save()
 }
 
@@ -61,14 +68,17 @@ func (c *Config) SetProxy() (err error) {
 	if err != nil {
 		proxy = ""
 	}
+
 	if len(proxy) == 0 {
 		color.Green("Current proxy is based on environment")
 	} else {
 		color.Green("Current proxy is %v", proxy)
 	}
+
 	color.Cyan(`Set a new proxy (e.g. "http://127.0.0.1:2333", "socks5://127.0.0.1:1080"`)
 	color.Cyan(`Enter empty line if you want to use default proxy from environment`)
 	color.Cyan(`Note: Proxy URL should match "protocol://host[:port]"`)
+
 	for {
 		proxy, err = formatProxy(util.ScanlineTrim())
 		if err == nil {
@@ -76,12 +86,14 @@ func (c *Config) SetProxy() (err error) {
 		}
 		color.Red(err.Error())
 	}
+
 	c.Proxy = proxy
 	if len(proxy) == 0 {
 		color.Green("Current proxy is based on environment")
 	} else {
 		color.Green("Current proxy is %v", proxy)
 	}
+
 	return c.save()
 }
 
@@ -90,14 +102,17 @@ func (c *Config) SetFolderName() (err error) {
 	color.Cyan(`Set folders' name`)
 	color.Cyan(`Enter empty line if you don't want to change the value`)
 	color.Green(`Root path (current: %v)`, c.FolderName["root"])
+
 	if value := util.ScanlineTrim(); value != "" {
 		c.FolderName["root"] = value
 	}
+
 	for _, problemType := range client.ProblemTypes {
 		color.Green(`%v path (current: %v)`, problemType, c.FolderName[problemType])
 		if value := util.ScanlineTrim(); value != "" {
 			c.FolderName[problemType] = value
 		}
 	}
+
 	return c.save()
 }

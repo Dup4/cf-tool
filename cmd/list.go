@@ -17,14 +17,17 @@ func List() (err error) {
 	cln := client.Instance
 	info := Args.Info
 	problems, err := cln.Statis(info)
+
 	if err != nil {
 		if err = loginAgain(cln, err); err == nil {
 			problems, err = cln.Statis(info)
 		}
 	}
+
 	if err != nil {
 		return
 	}
+
 	var buf bytes.Buffer
 	output := io.Writer(&buf)
 	table := tablewriter.NewWriter(output)
@@ -33,6 +36,7 @@ func List() (err error) {
 	table.SetAlignment(tablewriter.ALIGN_CENTER)
 	table.SetCenterSeparator("|")
 	table.SetAutoWrapText(false)
+
 	for _, prob := range problems {
 		table.Append([]string{
 			prob.ID,
@@ -42,6 +46,7 @@ func List() (err error) {
 			prob.IO,
 		})
 	}
+
 	table.Render()
 
 	scanner := bufio.NewScanner(io.Reader(&buf))
@@ -56,5 +61,6 @@ func List() (err error) {
 		}
 		ansi.Println(line)
 	}
+
 	return
 }

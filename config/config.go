@@ -43,20 +43,25 @@ func Init(path string) {
 		color.Red(err.Error())
 		color.Green("Create a new configuration in %v", path)
 	}
+
 	if c.Default < 0 || c.Default >= len(c.Template) {
 		c.Default = 0
 	}
+
 	if c.FolderName == nil {
 		c.FolderName = map[string]string{}
 	}
+
 	if _, ok := c.FolderName["root"]; !ok {
 		c.FolderName["root"] = "cf"
 	}
+
 	for _, problemType := range client.ProblemTypes {
 		if _, ok := c.FolderName[problemType]; !ok {
 			c.FolderName[problemType] = problemType
 		}
 	}
+
 	c.save()
 	Instance = c
 }
@@ -84,13 +89,16 @@ func (c *Config) save() (err error) {
 	encoder := json.NewEncoder(&data)
 	encoder.SetIndent("", "  ")
 	encoder.SetEscapeHTML(false)
+
 	err = encoder.Encode(c)
 	if err == nil {
 		os.MkdirAll(filepath.Dir(c.path), os.ModePerm)
 		err = ioutil.WriteFile(c.path, data.Bytes(), 0644)
 	}
+
 	if err != nil {
 		color.Red("Cannot save config to %v\n%v", c.path, err.Error())
 	}
+
 	return
 }

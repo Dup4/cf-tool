@@ -12,6 +12,7 @@ func Submit() (err error) {
 	cln := client.Instance
 	cfg := config.Instance
 	info := Args.Info
+
 	filename, index, err := getOneCode(Args.File, cfg.Template)
 	if err != nil {
 		return
@@ -29,5 +30,6 @@ func Submit() (err error) {
 			err = cln.Submit(info, lang, source)
 		}
 	}
+
 	return
 }

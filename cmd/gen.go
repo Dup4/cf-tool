@@ -32,6 +32,7 @@ func readTemplateSource(path string, cln *client.Client) (source string, err err
 	if err != nil {
 		return
 	}
+
 	source = parseTemplate(string(b), cln)
 	return
 }

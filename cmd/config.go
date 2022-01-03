@@ -13,6 +13,7 @@ func Config() (err error) {
 	cfg := config.Instance
 	cln := client.Instance
 	color.Cyan("Configure the tool")
+
 	ansi.Println(`0) login`)
 	ansi.Println(`1) add a template`)
 	ansi.Println(`2) delete a template`)
@@ -21,6 +22,7 @@ func Config() (err error) {
 	ansi.Println(`5) set host domain`)
 	ansi.Println(`6) set proxy`)
 	ansi.Println(`7) set folders' name`)
+
 	index := util.ChooseIndex(8)
 	if index == 0 {
 		return cln.ConfigLogin()
@@ -39,5 +41,6 @@ func Config() (err error) {
 	} else if index == 7 {
 		return cfg.SetFolderName()
 	}
+
 	return
 }
