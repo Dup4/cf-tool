@@ -10,6 +10,7 @@ builds:
     goarch:
       - amd64
       - arm64
+    binary: cf
 
 checksum:
   name_template: 'checksums.txt'
