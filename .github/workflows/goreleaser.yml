@@ -23,3 +23,9 @@ jobs:
         with:
           version: latest
           args: release --rm-dist
+
+      - name: Upload assets
+        uses: actions/upload-artifact@v2
+        with:
+          name: cf-tool
+          path: dist/*
