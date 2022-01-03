@@ -20,7 +20,7 @@ const configPath = "~/.cf/config"
 const sessionPath = "~/.cf/session"
 
 func main() {
-	usage := `Codeforces Tool $%version%$ (cf). https://github.com/xalanq/cf-tool
+	usage := `Codeforces Tool $%version%$ (cf). https://github.com/XCPCIO/cf-tool
 
 You should run "cf config" to configure your handle, password and code
 templates at first.
@@ -63,7 +63,7 @@ Examples:
   cf submit            cf will detect what you want to submit automatically.
   cf submit -f a.cpp
   cf submit https://codeforces.com/contest/100/A
-  cf submit -f a.cpp 100A 
+  cf submit -f a.cpp 100A
   cf submit -f a.cpp 100 a
   cf submit contest 100 a
   cf submit gym 100001 a
@@ -161,5 +161,6 @@ Script in template:
 	if err != nil {
 		color.Red(err.Error())
 	}
+
 	color.Unset()
 }
