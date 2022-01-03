@@ -19,3 +19,27 @@ release:
   github:
     owner: XCPCIO
     name: cf-tool
+
+changelog:
+  use: github
+  sort: asc
+
+  groups:
+    - title: Features
+      regexp: "^.*feat[(\\w)]*:+.*$"
+      order: 0
+    - title: 'Bug fixes'
+      regexp: "^.*fix[(\\w)]*:+.*$"
+      order: 1
+    - title: 'Refactor'
+      regexp: "^.*refactor[(\\w)]*:+.*$"
+      order: 2
+    - title: 'Test'
+      regexp: "^.*test[(\\w)]*:+.*$"
+      order: 3
+
+  filters:
+    exclude:
+      - '^docs'
+      - '^style'
+      - '^chore'
