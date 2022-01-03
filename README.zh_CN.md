@@ -30,7 +30,7 @@ Codeforces Tool 是 [Codeforces](https://codeforces.com) 的命令行界面的�
 
 欢迎大家一起完善这个工具呀，欢迎Pull requests。
 
-![](./assets/readme_1.gif)
+[![asciicast](https://asciinema.org/a/459641.svg)](https://asciinema.org/a/459641)
 
 ## 安装
 

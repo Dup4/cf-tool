@@ -30,7 +30,7 @@ It's fast, small, cross-platform and powerful.
 
 Pull requests are always welcome.
 
-![](./assets/readme_1.gif)
+[![asciicast](https://asciinema.org/a/459641.svg)](https://asciinema.org/a/459641)
 
 ## Installation
 
