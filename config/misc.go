@@ -99,7 +99,7 @@ func (c *Config) SetProxy() (err error) {
 
 // SetFolderName set folder name
 func (c *Config) SetFolderName() (err error) {
-	color.Cyan(`Set folders' name`)
+	color.Cyan(`Set folder's name`)
 	color.Cyan(`Enter empty line if you don't want to change the value`)
 	color.Green(`Root path (current: %v)`, c.FolderName["root"])
 
