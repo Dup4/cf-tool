@@ -8,7 +8,7 @@ builds:
       - windows
       - darwin
     goarch:
-      - i386
+      - "386"
       - amd64
       - arm64
     binary: cf
