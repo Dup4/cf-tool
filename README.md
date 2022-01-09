@@ -1,3 +1,5 @@
+<img align="right" src="./logo/codeforces-96x96.png">
+
 # Codeforces Tool
 
 [![Github release](https://img.shields.io/github/release/XCPCIO/cf-tool.svg)](https://github.com/XCPCIO/cf-tool/releases)
