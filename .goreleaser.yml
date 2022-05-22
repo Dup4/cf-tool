@@ -14,11 +14,11 @@ builds:
     binary: cf
 
 checksum:
-  name_template: 'checksums.txt'
+  name_template: "checksums.txt"
 
 release:
   github:
-    owner: XCPCIO
+    owner: Dup4
     name: cf-tool
 
 changelog:
@@ -29,18 +29,18 @@ changelog:
     - title: Features
       regexp: "^.*feat[(\\w)]*:+.*$"
       order: 0
-    - title: 'Bug fixes'
+    - title: "Bug fixes"
       regexp: "^.*fix[(\\w)]*:+.*$"
       order: 1
-    - title: 'Refactor'
+    - title: "Refactor"
       regexp: "^.*refactor[(\\w)]*:+.*$"
       order: 2
-    - title: 'Test'
+    - title: "Test"
       regexp: "^.*test[(\\w)]*:+.*$"
       order: 3
 
   filters:
     exclude:
-      - '^docs'
-      - '^style'
-      - '^chore'
+      - "^docs"
+      - "^style"
+      - "^chore"
