@@ -1,11 +1,11 @@
 package cmd
 
 import (
+	"github.com/Dup4/cf-tool/client"
+	"github.com/Dup4/cf-tool/config"
+	"github.com/Dup4/cf-tool/util"
 	"github.com/fatih/color"
 	ansi "github.com/k0kubun/go-ansi"
-	"github.com/xalanq/cf-tool/client"
-	"github.com/xalanq/cf-tool/config"
-	"github.com/xalanq/cf-tool/util"
 )
 
 // Config command

@@ -10,10 +10,10 @@ import (
 
 	"github.com/docopt/docopt-go"
 
+	"github.com/Dup4/cf-tool/client"
+	"github.com/Dup4/cf-tool/config"
+	"github.com/Dup4/cf-tool/util"
 	"github.com/fatih/color"
-	"github.com/xalanq/cf-tool/client"
-	"github.com/xalanq/cf-tool/config"
-	"github.com/xalanq/cf-tool/util"
 )
 
 // Eval opts

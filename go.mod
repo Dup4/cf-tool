@@ -1,4 +1,4 @@
-module github.com/xalanq/cf-tool
+module github.com/Dup4/cf-tool
 
 go 1.18
 
