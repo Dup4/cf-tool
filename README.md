@@ -40,12 +40,10 @@ You can download the pre-compiled binary file in [here](https://github.com/XCPCI
 
 Then enjoy the cf-tool~
 
-Or you can compile it from the source **(go >= 1.16)**:
+Or you can install it from go tool **(go >= 1.18)**:
 
 ```plain
-$ go get github.com/XCPCIO/cf-tool
-$ cd $GOPATH/src/github.com/XCPCIO/cf-tool
-$ go build -ldflags "-s -w" cf.go
+$ go install github.com/Dup4/cf-tool@latest
 ```
 
 If you don't know what's the `$GOPATH`, please see here <https://github.com/golang/go/wiki/GOPATH>.

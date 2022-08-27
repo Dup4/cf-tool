@@ -1,14 +1,17 @@
 {
-    "editor.tabSize": 4,
-    "editor.insertSpaces": true,
-    "editor.formatOnSave": true,
-    "files.trimTrailingWhitespace": true,
-    "files.insertFinalNewline": true,
-    "files.trimFinalNewlines": true,
-    "cSpell.words": [
-        "Codeforces",
-        "goarch",
-        "gofmt",
-        "Goreleaser"
-    ],
+	"editor.tabSize": 4,
+	"editor.insertSpaces": true,
+	"editor.formatOnSave": true,
+	"files.trimTrailingWhitespace": true,
+	"files.insertFinalNewline": true,
+	"files.trimFinalNewlines": true,
+	"cSpell.words": [
+		"Codeforces",
+		"goarch",
+		"gofmt",
+		"Goreleaser"
+	],
+	"[go]": {
+		"editor.defaultFormatter": "golang.go"
+	}
 }
