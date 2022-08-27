@@ -25,7 +25,7 @@ const configPath = "~/.cf/config"
 const sessionPath = "~/.cf/session"
 
 func main() {
-	usage := `Codeforces Tool $%version%$ (cf). https://github.com/XCPCIO/cf-tool
+	usage := `Codeforces Tool $%version%$ (cf). https://github.com/Dup4/cf-tool
 
 You should run "cf config" to configure your handle, password and code
 templates at first.

@@ -69,7 +69,7 @@ func getLatest() (version, note, ptime, url string, size uint, err error) {
 		return
 	}
 
-	resp, err := http.Get("https://api.github.com/repos/XCPCIO/cf-tool/releases/latest")
+	resp, err := http.Get("https://api.github.com/repos/Dup4/cf-tool/releases/latest")
 	if err != nil {
 		return
 	}
@@ -88,7 +88,7 @@ func getLatest() (version, note, ptime, url string, size uint, err error) {
 	note = result["body"].(string)
 	tm, _ := time.Parse("2006-01-02T15:04:05Z", result["published_at"].(string))
 	ptime = tm.In(time.Local).Format("2006-01-02 15:04")
-	url = fmt.Sprintf("https://github.com/XCPCIO/cf-tool/releases/download/%v/cf-tool_%v_%v_%v.tar.gz", version, version[1:], goos, arch)
+	url = fmt.Sprintf("https://github.com/Dup4/cf-tool/releases/download/%v/cf-tool_%v_%v_%v.tar.gz", version, version[1:], goos, arch)
 	assets, _ := result["assets"].([]interface{})
 
 	for _, tmp := range assets {
