@@ -17,8 +17,10 @@ fmt:
 	go fmt ./...
 
 build:
-	go build -ldflags ${LDFLAGS} -o ${NAME} cf.go
+	go build -ldflags ${LDFLAGS} -o ${NAME} ${NAME}.go
 
-.PHONY: clean
+install:
+	go install -ldflags ${LDFLAGS} ${NAME}.go
+
 clean:
-	rm -fr $(NAME)
+	rm -fr ${NAME}

@@ -40,12 +40,12 @@ Codeforces Tool 是 [Codeforces](https://codeforces.com) 的命令行界面的�
 
 然后就能直接用啦~
 
-或者你可以把整个 repo 给 clone 下来，然后自己编译 (go >= 1.16)：
+或者你可以把整个 repo 给 clone 下来，然后自己编译 (go >= 1.18)：
 
-```plain
-$ go get github.com/Dup4/cf-tool
-$ cd $GOPATH/src/github.com/Dup4/cf-tool
-$ go build -ldflags "-s -w" cf.go
+```bash
+git clone https://github.com/Dup4/cf-tool.git
+cd cf-tool
+make install
 ```
 
 如果你不知道 `$GOPATH` 是什么，请看一下这篇文章 <https://github.com/golang/go/wiki/GOPATH>.

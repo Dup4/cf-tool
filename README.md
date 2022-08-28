@@ -42,8 +42,10 @@ Then enjoy the cf-tool~
 
 Or you can install it from go tool **(go >= 1.18)**:
 
-```plain
-$ go install github.com/Dup4/cf-tool@latest
+```bash
+git clone https://github.com/Dup4/cf-tool.git
+cd cf-tool
+make install
 ```
 
 If you don't know what's the `$GOPATH`, please see here <https://github.com/golang/go/wiki/GOPATH>.
