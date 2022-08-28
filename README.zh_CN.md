@@ -6,7 +6,7 @@
 [![platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-blue.svg)](https://github.com/Dup4/cf-tool/releases)
 [![Build](https://github.com/Dup4/cf-tool/actions/workflows/build.yml/badge.svg)](https://github.com/Dup4/cf-tool/actions/workflows/build.yml)
 [![Go Report Card](https://goreportcard.com/badge/github.com/Dup4/cf-tool)](https://goreportcard.com/report/github.com/Dup4/cf-tool)
-[![Go Version](https://img.shields.io/badge/go-%3E%3D1.16-green.svg)](https://github.com/golang)
+[![GitHub go.mod Go version](https://img.shields.io/github/go-mod/go-version/Dup4/cf-tool)](https://github.com/Dup4/cf-tool/blob/main/go.mod)
 [![license](https://img.shields.io/badge/license-MIT-%23373737.svg)](https://raw.githubusercontent.com/Dup4/cf-tool/main/LICENSE)
 
 Codeforces Tool 是 [Codeforces](https://codeforces.com) 的命令行界面的工具。
